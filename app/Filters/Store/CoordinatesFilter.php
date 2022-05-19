@@ -11,12 +11,8 @@ class CoordinatesFilter
             && $request->exists('radius');
 
         if ($value && $requestHasAllParameters) {
-            return $builder->whereRaw("earth_box(ll_to_earth(:lat,:lon), :radius) @> ll_to_earth(lat, lon)",
-                [
-                    'lat' => $request->get('lat'),
-                    'lon' => $request->get('lon'),
-                    'radius' => $request->get('radius') * 1000
-                ]
+            return $builder->whereRaw("earth_box(ll_to_earth(?,?), ?) @> ll_to_earth(lat, lon)",
+                [ $request->get('lat'), $request->get('lon'), $request->get('radius') * 1000 ]
             );
         }
     }

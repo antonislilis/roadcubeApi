@@ -18,22 +18,6 @@ class RolesTableSeeder extends Seeder
 		"show_logs": true,
 		"delete_logs": true
 	},
-	"users": {
-		"view": true,
-		"create": true,
-		"edit": true,
-		"delete": true,
-		"soft_delete": true,
-		"user_shops_update": true,
-		"user_shops_delete": true
-	},
-	"roles": {
-		"view": true,
-		"create": true,
-		"edit": true,
-		"delete": true,
-		"soft_delete": true
-	},
 	"account_type": {
 		"is_admin": true,
 		"is_user": false,
@@ -49,22 +33,6 @@ class RolesTableSeeder extends Seeder
 	"admin": {
 		"show_logs": true,
 		"delete_logs": false
-	},
-	"users": {
-		"view": false,
-		"create": false,
-		"edit": false,
-		"delete": false,
-		"soft_delete": false,
-		"user_shops_update": false,
-		"user_shops_delete": false
-	},
-	"roles": {
-		"view": false,
-		"create": false,
-		"edit": false,
-		"delete": false,
-		"soft_delete": false
 	},
 	"account_type": {
 		"is_admin": false,
@@ -82,22 +50,6 @@ class RolesTableSeeder extends Seeder
 	"admin": {
 		"show_logs": false,
 		"delete_logs": false
-	},
-	"users": {
-		"view": false,
-		"create": false,
-		"edit": false,
-		"delete": false,
-		"soft_delete": false,
-		"user_shops_update": false,
-		"user_shops_delete": false
-	},
-	"roles": {
-		"view": false,
-		"create": false,
-		"edit": false,
-		"delete": false,
-		"soft_delete": false
 	},
 	"account_type": {
 		"is_admin": false,
