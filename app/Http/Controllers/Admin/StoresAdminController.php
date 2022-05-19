@@ -36,29 +36,29 @@ class StoresAdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\  $request
+     * @param \App\Http\Requests\ $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreStoreRequest $request)
     {
         $content = $request->json()->all();
 
-        if($wrongRequestMessages = $this->propertyService->getRequestArrayWrongMessages($content)){
+        if ($wrongRequestMessages = $this->propertyService->getRequestArrayWrongMessages($content)) {
             return response($wrongRequestMessages, Response::HTTP_BAD_REQUEST);
         }
         $stored = $this->storeRepository->create($content);
 
-        if(!$stored) {
+        if (!$stored) {
             return response('Store cannot be saved', Response::HTTP_BAD_REQUEST);
         }
-        return response($stored, Response::HTTP_CREATED );
+        return response($stored, Response::HTTP_CREATED);
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,7 +69,7 @@ class StoresAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +80,8 @@ class StoresAdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +92,7 @@ class StoresAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

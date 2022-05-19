@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['middleware' => ['XSS']], function () {
 
-include('auth.php');
-include('store.php');
-include('admin.php');
+    include('auth.php');
+    include('store.php');
+    include('admin.php');
 
 });

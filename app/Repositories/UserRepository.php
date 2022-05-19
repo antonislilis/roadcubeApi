@@ -4,7 +4,8 @@ namespace App\Repositories;
 
 class UserRepository extends Repository
 {
-    public function model(){
+    public function model()
+    {
         return 'App\Models\User';
     }
 }
