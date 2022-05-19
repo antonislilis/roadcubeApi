@@ -1,9 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Properties;
-
-use App\Http\Requests\Request;
-
+namespace App\Http\Requests;
 
 class StoreStoreRequest extends Request
 {
@@ -29,7 +26,7 @@ class StoreStoreRequest extends Request
      */
     public function rules()
     {
-        $storeStoreRequest =
+        return
             [
                 'parent_id' => 'numeric|required',
                 'store_type_id' => 'numeric|required',
@@ -39,11 +36,8 @@ class StoreStoreRequest extends Request
                 'zip' => 'digits:5|max:15|required',
                 'email' => 'required|email',
                 'lat' => 'numeric',
-                'long' => 'numeric',
+                'lon' => 'numeric',
             ];
-
-        return $storeStoreRequest;
-
 
     }
 
@@ -59,14 +53,6 @@ class StoreStoreRequest extends Request
             'lat.numeric' => 'Latitude must be number like (38.0113900)',
             'lon.numeric' => 'Longitude must be number like (23.7513200)',
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        /*
-        $this->merge([
-            'sale_fields' => json_decode($this->sale_fields),
-        ]);*/
     }
 
 }
