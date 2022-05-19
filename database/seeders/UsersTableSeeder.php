@@ -1,8 +1,11 @@
 <?php
+
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder {
+class UsersTableSeeder extends Seeder
+{
 
     public function run()
     {
@@ -14,7 +17,7 @@ class UsersTableSeeder extends Seeder {
                 'id' => 1,
                 'name' => 'Admin',
                 'password' => \Hash::make('12345678'),
-                'email'=>'admin@admin.net',
+                'email' => 'admin@admin.net',
                 'role_id' => '1',
                 'profile' => '{"first_name":null,"last_name":null}'
             ],
@@ -22,7 +25,7 @@ class UsersTableSeeder extends Seeder {
                 'id' => 2,
                 'name' => 'User',
                 'password' => \Hash::make('12345678'),
-                'email'=>'user@user.net',
+                'email' => 'user@user.net',
                 'role_id' => '2',
                 'profile' => '{"first_name":null,"last_name":null}'
             ],

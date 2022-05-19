@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 class LogController extends Controller
 {
     public function __construct(protected LogRepository $logRepository)
-    {}
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *

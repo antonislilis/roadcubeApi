@@ -10,24 +10,24 @@
 |
 */
 
-    Route::group(['prefix' => 'admin', 'namespace' => "App\Http\Controllers\Admin\\",], function () {
-        /*
-         * PERMISSIONING ROUTES
-         */
-        Route::group(['prefix' => 'logs', 'middleware' => ['auth:api', 'permissions'], 'permissions' => ['account_type' => ['is_admin']]], function () {
+Route::group(['prefix' => 'admin', 'namespace' => "App\Http\Controllers\Admin\\",], function () {
+    /*
+     * PERMISSIONING ROUTES
+     */
+    Route::group(['prefix' => 'logs', 'middleware' => ['auth:api', 'permissions'], 'permissions' => ['account_type' => ['is_admin']]], function () {
 
-            Route::get('/', [
-                'uses' => 'LogController@index',
-                'as' => 'showLogs',
-                'permissions' => ['admin' => ['show_logs']]
-            ])->middleware('permissions');
+        Route::get('/', [
+            'uses' => 'LogController@index',
+            'as' => 'showLogs',
+            'permissions' => ['admin' => ['show_logs']]
+        ])->middleware('permissions');
 
-            Route::post('/delete', [
-                'uses' => 'LogController@destroy',
-                'as' => 'clearLogs',
-                'permissions' => ['admin' => ['delete_logs']]
-            ])->middleware('permissions');
-
-        });
+        Route::post('/delete', [
+            'uses' => 'LogController@destroy',
+            'as' => 'clearLogs',
+            'permissions' => ['admin' => ['delete_logs']]
+        ])->middleware('permissions');
 
     });
+
+});

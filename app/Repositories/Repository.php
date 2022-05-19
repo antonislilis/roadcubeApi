@@ -31,13 +31,13 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
     protected $skipCriteria = false;
 
 
-
     /**
      * @param App $app
      * @param Collection $collection
      * @throws \Exception
      */
-    public function __construct(App $app, Collection $collection){
+    public function __construct(App $app, Collection $collection)
+    {
         $this->app = $app;
         $this->criteria = $collection;
         $this->resetScope();
@@ -55,11 +55,12 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @return Model
      * @throws \Exception
      */
-    public function makeModel(){
+    public function makeModel()
+    {
 
         $model = $this->app->make($this->model());
 
-        if (!$model instanceof Model){
+        if (!$model instanceof Model) {
             throw new \Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
@@ -69,7 +70,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
     /**
      * @return mixed
      */
-    public function all(){
+    public function all()
+    {
         $this->applyCriteria();
         return $this->model->get();
     }
@@ -80,7 +82,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $values
      * @return mixed
      */
-    public function whereIn($field, $values){
+    public function whereIn($field, $values)
+    {
         $this->applyCriteria();
         return $this->model->whereIn($field, $values);
     }
@@ -90,7 +93,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $values
      * @return mixed
      */
-    public function without($field, $values){
+    public function without($field, $values)
+    {
         $this->applyCriteria();
         return $this->model->whereNotIn($field, $values);
     }
@@ -99,7 +103,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param int $perPage
      * @return mixed
      */
-    public function paginate($perPage = 15){
+    public function paginate($perPage = 15)
+    {
         return $this->model->paginate($perPage);
     }
 
@@ -108,7 +113,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $value
      * @return mixed
      */
-    public function orderBy($name, $value){
+    public function orderBy($name, $value)
+    {
         return $this->model->orderBy($name, $value);
     }
 
@@ -116,7 +122,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $name
      * @return mixed
      */
-    public function groupBy($name){
+    public function groupBy($name)
+    {
         return $this->model->groupBy($name);
     }
 
@@ -124,7 +131,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param array $model
      * @return mixed
      */
-    public function save($model){
+    public function save($model)
+    {
         return $model->save();
     }
 
@@ -132,7 +140,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param array $data
      * @return mixed
      */
-    public function create(array $data){
+    public function create(array $data)
+    {
         return $this->model->create($data);
     }
 
@@ -143,7 +152,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @return mixed
      * @internal param $id
      */
-    public function update(array $data, $value, $attribute="id"){
+    public function update(array $data, $value, $attribute = "id")
+    {
         return $this->model->where($attribute, '=', $value)->update($data);
     }
 
@@ -151,7 +161,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $id
      * @return mixed
      */
-    public function delete($id){
+    public function delete($id)
+    {
         return $this->model->destroy($id);
     }
 
@@ -159,7 +170,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $id
      * @return mixed
      */
-    public function find($id) {
+    public function find($id)
+    {
         return $this->model->find($id);
     }
 
@@ -167,7 +179,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $id
      * @return mixed
      */
-    public function findOrFail($id) {
+    public function findOrFail($id)
+    {
         return $this->model->findOrFail($id);
     }
 
@@ -176,7 +189,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $value
      * @return mixed
      */
-    public function findFirstBy($attribute, $value){
+    public function findFirstBy($attribute, $value)
+    {
         $this->applyCriteria();
         return $this->model->where($attribute, '=', $value)->first();
     }
@@ -186,7 +200,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $value
      * @return mixed
      */
-    public function findFirstByOrFail($attribute, $value){
+    public function findFirstByOrFail($attribute, $value)
+    {
         $this->applyCriteria();
         return $this->model->where($attribute, '=', $value)->firstOrFail();
     }
@@ -196,7 +211,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $source
      * @param $target
      */
-    public function attach($relation, $source, $target){
+    public function attach($relation, $source, $target)
+    {
         $source->$relation()->attach($target);
     }
 
@@ -205,7 +221,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $source
      * @param $target
      */
-    public function detach($relation, $source, $target){
+    public function detach($relation, $source, $target)
+    {
         $source->$relation()->detach($target);
     }
 
@@ -214,7 +231,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $source
      * @param $target
      */
-    public function sync($relation, $source, $target){
+    public function sync($relation, $source, $target)
+    {
         $source->$relation()->sync($target);
     }
 
@@ -223,16 +241,18 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $value
      * @return mixed
      */
-    public function where($attribute, $operator = '-', $value ){
+    public function where($attribute, $operator = '-', $value)
+    {
         $this->applyCriteria();
-        return $this->model->where($attribute, $operator , $value)->get();
+        return $this->model->where($attribute, $operator, $value)->get();
     }
 
     /**
      * @param $relation
      * @return mixed
      */
-    public function with($relation){
+    public function with($relation)
+    {
         $this->applyCriteria();
         return $this->model->with($relation);
     }
@@ -244,9 +264,10 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $whereKey
      * @return mixed
      */
-    public function whereNotHave($relation, $id, $whereKey){
+    public function whereNotHave($relation, $id, $whereKey)
+    {
         $this->applyCriteria();
-        return $this->model->with($relation)->whereDoesntHave($relation, function($query) use ($id, $whereKey) {
+        return $this->model->with($relation)->whereDoesntHave($relation, function ($query) use ($id, $whereKey) {
             $query->where($whereKey, $id);
         });
     }
@@ -254,7 +275,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
     /**
      * @return mixed
      */
-    public function query(){
+    public function query()
+    {
         return $this->model->query();
     }
 
@@ -266,7 +288,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
     /**
      * @return $this
      */
-    public function resetScope(){
+    public function resetScope()
+    {
         $this->skipCriteria(false);
         return $this;
     }
@@ -275,7 +298,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param bool $status
      * @return $this
      */
-    public function skipCriteria($status = true){
+    public function skipCriteria($status = true)
+    {
         $this->skipCriteria = $status;
         return $this;
     }
@@ -283,7 +307,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
     /**
      * @return mixed
      */
-    public function getCriteria(){
+    public function getCriteria()
+    {
         return $this->criteria;
     }
 
@@ -294,7 +319,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param $query
      * @return $this
      */
-    public function getByCriteria(Criteria $criteria, $data = null, $notIn = null, $query = null){
+    public function getByCriteria(Criteria $criteria, $data = null, $notIn = null, $query = null)
+    {
 
         return $criteria->apply($this->model, $this, $data, $notIn, $query);
     }
@@ -303,7 +329,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
      * @param Criteria $criteria
      * @return $this
      */
-    public function pushCriteria(Criteria $criteria){
+    public function pushCriteria(Criteria $criteria)
+    {
         $this->criteria->push($criteria);
         return $this;
     }
@@ -311,12 +338,13 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
     /**
      * @return $this
      */
-    public function  applyCriteria() {
-        if($this->skipCriteria === true)
+    public function applyCriteria()
+    {
+        if ($this->skipCriteria === true)
             return $this;
 
-        foreach($this->getCriteria() as $criteria){
-            if($criteria instanceof Criteria)
+        foreach ($this->getCriteria() as $criteria) {
+            if ($criteria instanceof Criteria)
                 $this->model = $criteria->apply($this->model, $this);
         }
 

@@ -11,14 +11,14 @@ class AdminGuard
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         $userRoles = [];
-        if(Auth::user()){
+        if (Auth::user()) {
             $userRoles = Auth::user()->roles->pluck('name')->all();
         }
         $isRoleAdminOrRoot = [

@@ -14,6 +14,7 @@ class StoresController extends Controller
     {
         $this->storeRepository = $storeRepository;
     }
+
     /**
      * Display a listing of the resource.
      *

@@ -19,7 +19,7 @@ class Store extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'store_type_id','name', 'app_name','address', 'zip', 'email', 'lat', 'lon'
+        'parent_id', 'store_type_id', 'name', 'app_name', 'address', 'zip', 'email', 'lat', 'lon'
     ];
 
     protected $dates = ['deleted_at'];

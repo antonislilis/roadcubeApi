@@ -15,10 +15,10 @@ abstract class AbstractFilter
     {
         $this->request = $request;
     }
+
     public function filter(Builder $builder)
     {
-        foreach($this->getFilters() as $filter => $value)
-        {
+        foreach ($this->getFilters() as $filter => $value) {
             $this->resolveFilter($filter)->filter($builder, $value, $this->request);
         }
         return $builder;
