@@ -2,9 +2,11 @@
 
 namespace App\Filters\Store;
 
-class AddressFilter
+use App\Filters\FilterInterface;
+
+class AddressFilter implements FilterInterface
 {
-    public function filter($builder, $value)
+    public function filter($builder, $value, $request)
     {
         return $builder->where('address', 'like', "%{$value}%");
     }

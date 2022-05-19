@@ -18,5 +18,4 @@ class Permission extends Model
         'name', 'category', 'is_default'
     ];
 
-
 }

@@ -30,4 +30,7 @@ interface RepositoryInterface
     public function whereNotHave($relation, $id, $whereKey);
 
     public function query();
+
+    public function truncate();
+
 }

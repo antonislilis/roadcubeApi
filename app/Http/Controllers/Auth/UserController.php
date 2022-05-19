@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MeController extends Controller
+class UserController extends Controller
 {
     public function __construct()
     {
@@ -18,7 +18,8 @@ class MeController extends Controller
 
         return response()->json([
             'email' => $user->email,
-            'name' => $user->name
+            'name' => $user->name,
+            'role' => $user->role->role,
         ]);
     }
 }

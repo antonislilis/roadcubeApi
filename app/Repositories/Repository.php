@@ -280,6 +280,15 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface
         return $this->model->query();
     }
 
+    /**
+     * @return mixed
+     */
+    public function truncate()
+    {
+        return $this->model->truncate();
+    }
+
+
 
     /**
      * CRITERIA FUNCTIONS

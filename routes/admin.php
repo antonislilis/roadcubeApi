@@ -14,7 +14,10 @@ Route::group(['prefix' => 'admin', 'namespace' => "App\Http\Controllers\Admin\\"
     /*
      * PERMISSIONING ROUTES
      */
-    Route::group(['prefix' => 'logs', 'middleware' => ['auth:api', 'permissions'], 'permissions' => ['account_type' => ['is_admin']]], function () {
+    Route::group([
+        'prefix' => 'logs',
+        'middleware' => ['auth:api', 'permissions'],
+        'permissions' => ['account_type' => ['is_admin']]], function () {
 
         Route::get('/', [
             'uses' => 'LogController@index',
@@ -22,7 +25,7 @@ Route::group(['prefix' => 'admin', 'namespace' => "App\Http\Controllers\Admin\\"
             'permissions' => ['admin' => ['show_logs']]
         ])->middleware('permissions');
 
-        Route::post('/delete', [
+        Route::delete('/delete', [
             'uses' => 'LogController@destroy',
             'as' => 'clearLogs',
             'permissions' => ['admin' => ['delete_logs']]

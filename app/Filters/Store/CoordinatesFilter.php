@@ -2,7 +2,9 @@
 
 namespace App\Filters\Store;
 
-class CoordinatesFilter
+use App\Filters\FilterInterface;
+
+class CoordinatesFilter implements FilterInterface
 {
     public function filter($builder, $value, $request)
     {

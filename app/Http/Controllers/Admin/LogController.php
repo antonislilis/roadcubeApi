@@ -23,8 +23,10 @@ class LogController extends Controller
         return response()->json($stores, Response::HTTP_OK);
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        $stores = $this->logRepository->truncate();
+        return response()->json([
+            'message' => 'All logs have been deleted'], Response::HTTP_NO_CONTENT );
     }
 }

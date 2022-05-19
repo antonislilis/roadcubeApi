@@ -20,6 +20,6 @@ Route::group(
             'as' => 'register'
         ]);
 
-        Route::get('me', 'MeController');
+        Route::get('user', 'UserController');
     }
 );

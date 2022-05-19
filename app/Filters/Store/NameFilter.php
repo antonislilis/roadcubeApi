@@ -2,9 +2,11 @@
 
 namespace App\Filters\Store;
 
-class NameFilter
+use App\Filters\FilterInterface;
+
+class NameFilter implements FilterInterface
 {
-    public function filter($builder, $value)
+    public function filter($builder, $value, $request)
     {
         return $builder->where('name', 'like', "%{$value}%");
     }

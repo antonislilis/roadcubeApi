@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('store_id');
-            $table->integer('parent_id')->unsigned()->nullable();
+            $table->string('parent_id')->nullable();
             $table->integer('store_type_id')->unsigned()->nullable();
             $table->string('name', 60)->nullable();
             $table->string('app_name', 60)->nullable();

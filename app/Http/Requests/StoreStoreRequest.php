@@ -28,7 +28,7 @@ class StoreStoreRequest extends Request
     {
         return
             [
-                'parent_id' => 'numeric|required',
+                'parent_id' => 'in:1,2,null|nullable',
                 'store_type_id' => 'numeric|required',
                 'name' => 'string|max:120|min:3|required',
                 'app_name' => 'string|max:200|min:3|required',

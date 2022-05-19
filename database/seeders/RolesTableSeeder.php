@@ -42,7 +42,7 @@ class RolesTableSeeder extends Seeder
                         "is_user": true,
                         "is_guest": false
                     },
-                    "properties": {
+                    "stores": {
                        "view": true,
                         "create": true,
                         "delete": false
@@ -61,7 +61,7 @@ class RolesTableSeeder extends Seeder
                         "is_user": false,
                         "is_guest": true
                     },
-                    "properties": {
+                    "stores": {
                        "view": true,
                         "create": false,
                         "delete": false
