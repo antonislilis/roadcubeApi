@@ -10,6 +10,7 @@ Route::group([
     'prefix' => 'store',
     'namespace' => "App\Http\Controllers\\"], function () {
 
+    //Create a store (Only admin and logged users have permission)
     Route::post('/create', [
         'uses' => 'StoresController@store',
         'as' => 'createStore',
@@ -23,6 +24,7 @@ Route::group([
             'uses' => 'StoresController@index',
             'as' => 'showAllStores'
         ]);
+        //Search stores with filters
         Route::get('/search', [
             'uses' => 'StoresController@search',
             'as' => 'searchStores'

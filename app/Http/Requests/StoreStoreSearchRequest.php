@@ -14,11 +14,6 @@ class StoreStoreSearchRequest extends Request
         return true;
     }
 
-   /* function validationData()
-    {
-        return $this->json()->all();
-    }*/
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -46,8 +41,9 @@ class StoreStoreSearchRequest extends Request
     public function messages()
     {
         return [
-            'lat.numeric' => 'Latitude must be number like (38.0113900)',
-            'lon.numeric' => 'Longitude must be number like (23.7513200)',
+            'lat.required_with' => 'In order to make an area search, Latitude, Longitude and Radius fields are required',
+            'lon.required_with' => 'In order to make an area search, Latitude, Longitude and Radius fields are required',
+            'radius.required_with' => 'In order to make an area search, Latitude, Longitude and Radius fields are required',
         ];
     }
 
