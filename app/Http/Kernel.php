@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'permissions' => \App\Http\Middleware\CheckPermission::class,
         'XSS' => \App\Http\Middleware\XSS::class,
         'adminRedirectIfAuthenticated' => \App\Http\Middleware\AdminRedirectIfAuthenticated::class,
+        'requestLoggerMiddleware' => \App\Http\Middleware\RequestLoggerMiddleware::class,
     ];
 }

@@ -1,3 +1,7 @@
 Create a database named roadcube
 
 php artisan migrate:fresh --seed
+
+
+CREATE EXTENSION cube;
+CREATE EXTENSION earthdistance;

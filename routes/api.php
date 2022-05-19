@@ -31,7 +31,9 @@ Route::group(
     }
 );
 
-Route::group(['prefix' => 'store', 'namespace' => "App\Http\Controllers\\"], function () {
+Route::group(['prefix' => 'store',
+    'middleware' => ['requestLoggerMiddleware'],
+    'namespace' => "App\Http\Controllers\\"], function () {
     //See all stores
     Route::get('/all', [
         'uses' => 'StoresController@index',

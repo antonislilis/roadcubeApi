@@ -96,17 +96,9 @@ class StoresController extends Controller
 
     public function search(Request $request)
     {
-       /* $stores = (new Filterer($request, Store::query()))
-            ->filter([new StoreNameFilter()]);*/
         $stores = $this->storeRepository->query()
             ->filter($request)
             ->get();
         return response()->json($stores, Response::HTTP_OK);
-        /*$stores = $this->storeRepository->all();
-        $passed = $stores->filter(function ($value, $key) {
-            return data_get($value, 'store_type_id') == 2;
-        });
-        $passed = $passed->all();
-        return response()->json($passed, Response::HTTP_OK);*/
     }
 }

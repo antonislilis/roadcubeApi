@@ -1,15 +1,4 @@
 <?php
-/**
- * File Description
- *
- * Some comprehensive Description of the files contents
- *
- * @author Your Name <Antonis.Lilis@interactivedata.com>
- * @user AntonyLilis
- * @version $Author:$ $Id:$ $Revision:$ $Date:$
- * @copyright 2017 Interactive Data Managed Solutions AG
- * @since 16/6/2017
- */
 
 namespace App\Repositories\Criteria\General;
 
