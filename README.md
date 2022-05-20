@@ -73,6 +73,8 @@ Inside the empty folder type
 ```
 
 ## Install Dependencies
+### !!! This step can be avoided if you got the project from the zip file.
+### !!! It's required only if you cloned the git repo.
 Now the project is on your folder. 
 It's time to install dependencies. Make sure that you have installed the composer. 
 
@@ -91,6 +93,8 @@ Make sure that you have the PostgreSQL installed.
 Create a database in the postgreSQL named "roadcube" or a name of your choice ( You can define this later in the .env file)
 
 ## Environment File
+
+### !!! This step can be avoided if you got the project from the zip file.
 Inside the roadCubeApi.zip file there is a file named .env
 
 Copy this file directly to the project root folder.
