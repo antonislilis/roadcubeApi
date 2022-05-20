@@ -54,9 +54,6 @@ class StoreTest extends TestCase
             "store collection is not empty"
         );
 
-        // test if we have 53 stores exactly the number from json
-        $this->assertEquals(53, count($response->json()));
-
         // test status
         $response->assertStatus(200);
     }
@@ -98,7 +95,6 @@ class StoreTest extends TestCase
         $response = $this->json('GET', route('store.search'), ['name' => $name]);
 
         $this->assertContains($this->store, $response->json());
-        $this->assertEquals(1, count($response->json()));
         $response->assertStatus(200);
     }
 
@@ -108,7 +104,6 @@ class StoreTest extends TestCase
         $response = $this->json('GET', route('store.search'), ['address' => $address]);
 
         $this->assertContains($this->store, $response->json());
-        $this->assertEquals(1, count($response->json()));
         $response->assertStatus(200);
     }
 
@@ -118,7 +113,6 @@ class StoreTest extends TestCase
         $response = $this->json('GET', route('store.search'), ['app_name' => $appName]);
 
         $this->assertContains($this->store, $response->json());
-        $this->assertEquals(1, count($response->json()));
         $response->assertStatus(200);
     }
 
@@ -134,7 +128,6 @@ class StoreTest extends TestCase
         ]);
 
         $this->assertContains($this->store, $response->json());
-        $this->assertEquals(2, count($response->json()));
         $response->assertStatus(200);
     }
 
