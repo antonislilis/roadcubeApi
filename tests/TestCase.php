@@ -2,21 +2,43 @@
 
 namespace Tests;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use JWTAuth;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    //HTTP status constants
-    const HTTP_OK = 200;
-    const HTTP_BAD_REQUEST = 400;
-    const HTTP_CREATED = 201;
-    const HTTP_UNPROCESSABLE_ENTITY = 422;
-    const HTTP_UNAUTHORIZED = 401;
-    const HTTP_FOUND = 302;
+    protected User $admin;
+    protected string $adminToken;
+    protected User $user;
+    protected string $userToken;
+    const ADMIN_ROLE_ID = '1';
+    const USER_ROLE_ID = '2';
+    const ROLE_ID_FIELD = 'role_id';
 
-    const HTTP_METHOD_GET = 'GET';
-    const HTTP_METHOD_POST = 'POST';
-    const HTTP_METHOD_DELETE = 'DELETE';
+    protected function signInAsAdmin()
+    {
+        $this->admin = User::where(self::ROLE_ID_FIELD, self::ADMIN_ROLE_ID)->first();
+        $this->adminToken = JWTAuth::fromUser($this->admin);
+        return $this;
+    }
+
+    protected function signInAsUser()
+    {
+        $this->user = User::where(self::ROLE_ID_FIELD, self::USER_ROLE_ID)->first();
+        $this->userToken = JWTAuth::fromUser($this->user);
+        return $this;
+    }
+
+    protected function setRouteWithTokenAdmin($route)
+    {
+        return $route . '?token=' . $this->adminToken;
+    }
+    protected function setRouteWithTokenUser($route)
+    {
+        return $route . '?token=' . $this->userToken;
+    }
+
 }

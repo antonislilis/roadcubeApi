@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Repositories\LogRepository;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class LogController extends Controller
 {
@@ -12,21 +13,16 @@ class LogController extends Controller
     {
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $stores = $this->logRepository->orderBy('created_at', 'desc')->get();
-        return response()->json($stores, Response::HTTP_OK);
+        return response()->json($stores, ResponseAlias::HTTP_OK);
     }
 
     public function destroy()
     {
-        $stores = $this->logRepository->truncate();
+        $this->logRepository->truncate();
         return response()->json([
-            'message' => 'All logs have been deleted'], Response::HTTP_NO_CONTENT );
+            'message' => 'All logs have been deleted'], ResponseAlias::HTTP_NO_CONTENT );
     }
 }

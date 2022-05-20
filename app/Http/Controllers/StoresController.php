@@ -7,6 +7,7 @@ use App\Http\Requests\StoreStoreSearchRequest;
 use App\Repositories\StoreRepository;
 use DB;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class StoresController extends Controller
 {
@@ -14,44 +15,32 @@ class StoresController extends Controller
     {
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $stores = $this->storeRepository->all();
-        return response()->json($stores, Response::HTTP_OK);
+        return response()->json($stores, ResponseAlias::HTTP_OK);
     }
 
 
-    public function search(StoreStoreSearchRequest $request)
+    public function search(StoreStoreSearchRequest $request): \Illuminate\Http\JsonResponse
     {
         $stores = $this->storeRepository->query()
             ->filter($request)
             ->get();
-        return response()->json($stores, Response::HTTP_OK);
+        return response()->json($stores, ResponseAlias::HTTP_OK);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreStoreRequest $request)
+
+    public function store(StoreStoreRequest $request): Response
     {
         $content = $request->json()->all();
         DB::select( DB::raw("SELECT setval(pg_get_serial_sequence('stores', 'store_id'), max(store_id)) FROM stores;"));
-        /*if ($wrongRequestMessages = $this->storeService->getRequestArrayWrongMessages($content)) {
-            return response($wrongRequestMessages, Response::HTTP_BAD_REQUEST);
-        }*/
+
         $stored = $this->storeRepository->create($content);
 
         if (!$stored) {
-            return response('Store cannot be saved', Response::HTTP_BAD_REQUEST);
+            return response('Store cannot be saved', ResponseAlias::HTTP_BAD_REQUEST);
         }
-        return response($stored, Response::HTTP_CREATED);
+        return response($stored, ResponseAlias::HTTP_CREATED);
     }
 }

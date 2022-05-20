@@ -21,13 +21,13 @@ Route::group(['prefix' => 'admin', 'namespace' => "App\Http\Controllers\Admin\\"
 
         Route::get('/', [
             'uses' => 'LogController@index',
-            'as' => 'showLogs',
+            'as' => 'logs.show',
             'permissions' => ['admin' => ['show_logs']]
         ])->middleware('permissions');
 
         Route::delete('/delete', [
             'uses' => 'LogController@destroy',
-            'as' => 'clearLogs',
+            'as' => 'logs.clear',
             'permissions' => ['admin' => ['delete_logs']]
         ])->middleware('permissions');
 

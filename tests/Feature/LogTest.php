@@ -2,47 +2,53 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use JWTAuth;
 use Tests\TestCase;
 
 class LogTest extends TestCase
 {
-    private $user;
-    private $token;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->user = User::where('role_id', '1')->first();
-        $this->token = JWTAuth::fromUser($this->user);
+        $this->signInAsAdmin();
+        $this->signInAsUser();
     }
 
     public function testLogIsCreatedAfterStoreSearchRequest()
     {
-        $url = route('showLogs') . '?token=' . $this->token;
-
         $appName = 'Roadcube';
-        $this->json('GET', route('searchStores'), ['app_name' => $appName]);
+        $this->json('GET', route('store.search'), ['app_name' => $appName]);
 
-        $response = $this->json('GET', $url);
+        $response = $this->json('GET',
+            $this->setRouteWithTokenAdmin(route('logs.show'))
+        );
         $lastElement = $response->json()[count($response->json()) - 1];
-        $this->assertContains("http://localhost/api/store/search", $lastElement);
+        $this->assertContains(request()->getSchemeAndHttpHost() . '/api/store/search', $lastElement);
         $response->assertStatus(200);
     }
 
-    public function testLogIsRequestNotExecutedIfNotAdmin()
+    public function testLogIsRequestNotExecutedIfNotLoggedIn()
     {
-        $this->json('GET', route('showLogs'))->assertStatus(401);
+        $this->json('GET',
+            route('logs.show')
+        )->assertStatus(401);
+
+    }
+
+    public function testLogIsRequestNotExecutedIfIsSimpleUser()
+    {
+        $this->json('GET',
+            $this->setRouteWithTokenUser(route('logs.show'))
+        )->assertStatus(401);
 
     }
 
     public function testLogIsRequestExecutedIfAdmin()
     {
-        $url = route('showLogs') . '?token=' . $this->token;
-
-        $this->json('GET', $url)->assertStatus(200);
+        $this->json('GET',
+            $this->setRouteWithTokenAdmin(route('logs.show'))
+        )->assertStatus(200);
 
     }
 }

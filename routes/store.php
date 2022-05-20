@@ -13,7 +13,7 @@ Route::group([
     //Create a store (Only admin and logged users have permission)
     Route::post('/create', [
         'uses' => 'StoresController@store',
-        'as' => 'createStore',
+        'as' => 'store.create',
         'permissions' => ['stores' => ['create']]
     ])->middleware('permissions');
 
@@ -22,12 +22,12 @@ Route::group([
         //See all stores
         Route::get('/all', [
             'uses' => 'StoresController@index',
-            'as' => 'showAllStores'
+            'as' => 'strore.all'
         ]);
         //Search stores with filters
         Route::get('/search', [
             'uses' => 'StoresController@search',
-            'as' => 'searchStores'
+            'as' => 'store.search'
         ]);
     });
 

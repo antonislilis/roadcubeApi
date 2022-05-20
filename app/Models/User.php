@@ -71,7 +71,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function role()
+    public function role(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }

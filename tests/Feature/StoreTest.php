@@ -8,9 +8,9 @@ use Tests\TestCase;
 
 class StoreTest extends TestCase
 {
-    private $storeStoreRequest;
-    private $storeStoreSearchRequest;
-    private $store;
+    private StoreStoreRequest $storeStoreRequest;
+    private StoreStoreSearchRequest $storeStoreSearchRequest;
+    private array $store;
 
     protected function setUp(): void
     {
@@ -43,7 +43,7 @@ class StoreTest extends TestCase
         //Disable logging request
         $this->app->instance('middleware.disable', true);
 
-        $response = $this->getJson('api/store/all');
+        $response = $this->getJson(route('strore.all'));
 
         // test if we have a specific store in database
         $this->assertContains($this->store, $response->json());
@@ -95,7 +95,7 @@ class StoreTest extends TestCase
     public function testStoreSearchWithNameFilter()
     {
         $name = 'Roadcube';
-        $response = $this->json('GET', route('searchStores'), ['name' => $name]);
+        $response = $this->json('GET', route('store.search'), ['name' => $name]);
 
         $this->assertContains($this->store, $response->json());
         $this->assertEquals(1, count($response->json()));
@@ -105,7 +105,7 @@ class StoreTest extends TestCase
     public function testStoreSearchWithAddressFilter()
     {
         $address = 'Αγιών Αναργύρων';
-        $response = $this->json('GET', route('searchStores'), ['address' => $address]);
+        $response = $this->json('GET', route('store.search'), ['address' => $address]);
 
         $this->assertContains($this->store, $response->json());
         $this->assertEquals(1, count($response->json()));
@@ -115,7 +115,7 @@ class StoreTest extends TestCase
     public function testStoreSearchWithAppNameFilter()
     {
         $appName = 'Roadcube';
-        $response = $this->json('GET', route('searchStores'), ['app_name' => $appName]);
+        $response = $this->json('GET', route('store.search'), ['app_name' => $appName]);
 
         $this->assertContains($this->store, $response->json());
         $this->assertEquals(1, count($response->json()));
@@ -127,7 +127,7 @@ class StoreTest extends TestCase
         $lat = 34.0107300;
         $lon = 23.7495600;
         $radius = 200;
-        $response = $this->json('GET', route('searchStores'), [
+        $response = $this->json('GET', route('store.search'), [
             'lat' => $lat,
             'lon' => $lon,
             'radius' => $radius,
@@ -142,7 +142,7 @@ class StoreTest extends TestCase
     {
         $lon = 23.7495600;
         $radius = 200;
-        $response = $this->json('GET', route('searchStores'), [
+        $response = $this->json('GET', route('store.search'), [
             'lon' => $lon,
             'radius' => $radius,
         ]);
@@ -156,7 +156,7 @@ class StoreTest extends TestCase
         $name = null; // will pass
         $lon = 'abc';
         $radius = '34'; // will pass
-        $response = $this->json('GET', route('searchStores'), [
+        $response = $this->json('GET', route('store.search'), [
             'name' => $name,
             'lon' => $lon,
             'radius' => $radius,
