@@ -3,7 +3,7 @@
 # RoadCube Store Api
 
 Some instructions on how to use this Api created by Antonis Lilis.
-#Summary
+# Summary
 
 ## Exercise Features
 1) I have created migration for the fields that are required for the 'stores' table.
@@ -14,7 +14,7 @@ Some instructions on how to use this Api created by Antonis Lilis.
 6) For the logging I created a custom solution. The middleware "RequestLoggerMiddleware" makes the job inside the terminate function. Specifically i use this mw on the store routes. Each time a store request is finished we save some basic log data in the database inside the "logs" table. I have created the LogController and Log Model. 
 7) I have created some tests for the stores and log functionality. 
 
-##More features
+## More features
 
 ### Users - Auth
 I have created an auth functionality with jwt token. You can register, login, logout users. 
@@ -38,7 +38,7 @@ All routes are protected with a custom XSS middleware, so to protect database fr
 Other middlewares are created like to check permissions, roles, send responses if user doesn't have the access rights for an action.
 
 
-#INSTRUCTIONS
+# INSTRUCTIONS
 
 ## Table of contents
 * [Download Project](#download-project)
