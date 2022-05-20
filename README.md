@@ -108,7 +108,7 @@ Copy this file directly to the project root folder.
 
 Now you can see something like:
 
-![img.png](storage/app/public/img.png)
+![img.png](resources/images/img.png)
 
 Here you have to write your database name, password, host etc. In this .env file case, are some default values.
 
@@ -131,7 +131,7 @@ To do this type:
 
 If everything goes as expected you will see something like
 
-![img_1.png](storage/app/public/img_1.png)
+![img_1.png](resources/images/img_1.png)
 
 Great! The database is filled with tables and data.
 
