@@ -1,21 +1,27 @@
+<div id="top"></div>
+
 # RoadCube Store Api
 
 Some instructions on how to use this Api created by Antonis Lilis
+
+## Table of contents
+* [Download Project](#download-project)
+* [Create Database](#create-database)
+* [Setup](#setup)
 
 ## Installation and test the Api
 
 Be sure that you will follow the instructions below
 
 
-
-## Download from zip or clone from Git
+## Download Project
 
 If you want to setup the project from the zip file you just have to extract this from roadCubeApi.zip
 in a folder of your choice
 
 In case you want to clone the project from Git [repository](https://github.com/antonislilis/roadcubeApi) just do the following
 At first make sure that you have installed the git on your machine
-```python
+```
 Create a folder of your choice
 Inside the empty folder type
 
@@ -50,6 +56,12 @@ Now you can see something like:
 
 Here you have to write your database name, password, host etc. In this .env file case, are some default values.
 
+## Run dev server
+In order to start a laravel server run the following command
+```python
+> php artisan serve
+```
+
 ## Migrate and seed database
 Once you finish with the database connection, is time to add the tables and some data in our database
 
@@ -66,5 +78,41 @@ If everything goes as expected you will see something like
 Great! The database is filled with tables and data.
 
 
+
+
 ## Testing the Api with Postman
 
+Inside the roadCubeApi.zip there is a collection for Postman. Import this
+and you will be able to have all endpoints in order to test the api.
+[Instructions on how to setup and import collection in postman](https://developer.ft.com/portal/docs-start-install-postman-and-import-request-collection)
+
+
+## Api Endpoints
+```python
+  Stores
+  
+  1) GET api/store/all -> No parameters
+  ( It returns all stores )
+  
+  
+  2) GET api/store/search -> parameters [ name, app_name, address, lat, lon, radius ]  
+  ( search stores with filtering by name, app_name, address, coordinates( lat, lon, radius) )
+  
+  Example request = api/store/search?name=Roadcube&lat=34.0107300&lon=23.7495600&radius=200
+  
+  
+  3) POST api/store/create -> Json Payload
+  
+  Example Payload 
+  {
+    "parent_id": 1,
+    "store_type_id": 1,
+    "name": "Test",
+    "app_name": "Test App",
+    "address": "test test",
+    "zip": "12222",
+    "email": "test.test@test.com",
+    "lat": 35.0107300,
+    "lon": 25.7495600
+}
+```
