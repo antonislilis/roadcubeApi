@@ -16,7 +16,7 @@ class Log extends Model
      * @var array
      */
     protected $fillable = [
-        'time', 'ip', 'method', 'header', 'url', 'status_code', 'user_name', 'user_id'
+        'ip', 'method', 'header', 'url', 'status_code', 'user_name', 'user_id'
     ];
 
 

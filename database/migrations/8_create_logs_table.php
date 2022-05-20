@@ -13,7 +13,6 @@ return new class extends Migration {
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('time', 50)->nullable();
             $table->string('ip', 20)->nullable();
             $table->string('method', 10)->nullable();
             $table->string('header', 100)->nullable();

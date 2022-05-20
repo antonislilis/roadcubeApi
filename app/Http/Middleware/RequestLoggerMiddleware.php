@@ -27,7 +27,6 @@ class RequestLoggerMiddleware
     {
         $user = \Auth::user();
         $log = new Log();
-        $log->time = date('Y-m-d H:i:s', LARAVEL_START);
         $log->ip = $request->ip();
         $log->method = $request->method();
         $log->body = $request->getContent();
