@@ -3,6 +3,9 @@
 # RoadCube Store Api
 
 Some instructions on how to use this Api created by Antonis Lilis.
+
+Api is created in Laravel 9 framework and postgreSQL database.
+
 # Summary
 
 ## Exercise Features
@@ -49,6 +52,7 @@ Other middlewares are created like to check permissions, roles, send responses i
 * [Database Migration](#database-migration)
 * [Testing Api With Postman](#testing-api-with-postman)
 * [Api Endpoints](#api-endpoints)
+* [Issues / Solutions](#issues-and-solutions)
 
 ## Installation and test the Api
 
@@ -73,17 +77,15 @@ Inside the empty folder type
 ```
 
 ## Install Dependencies
-### !!! This step can be avoided if you got the project from the zip file.
-### !!! It's required only if you cloned the git repo.
-Now the project is on your folder. 
-It's time to install dependencies. Make sure that you have installed the composer. 
+Now the project is in your folder. 
+It's time to install dependencies. Make sure that you have installed the [composer](https://getcomposer.org/). 
 
 To install project required dependencies type the following command:
 ```python
 > composer install
 ```
-Now the vendor forder has been created
-The project have been installed
+Now the vendor folder has been created.
+The project has been installed.
 
 ## Create Database
 This project is using PostgreSQL database schema
@@ -91,6 +93,11 @@ This project is using PostgreSQL database schema
 Make sure that you have the PostgreSQL installed.
 
 Create a database in the postgreSQL named "roadcube" or a name of your choice ( You can define this later in the .env file)
+
+###!!! In case that the filtering on search request sends an sql state error maybe you need to run in postgreSQL the following commands in console
+CREATE EXTENSION cube;
+
+CREATE EXTENSION earthdistance;
 
 ## Environment File
 
@@ -101,7 +108,7 @@ Copy this file directly to the project root folder.
 
 Now you can see something like:
 
-![img.png](img.png)
+![img.png](storage/app/public/img.png)
 
 Here you have to write your database name, password, host etc. In this .env file case, are some default values.
 
@@ -110,6 +117,8 @@ In order to start a laravel server run the following command
 ```python
 > php artisan serve
 ```
+Now the laravel dev server should be running and by default the host is http://127.0.0.1:8000
+
 
 ## Database Migration
 Once you finish with the database connection, is time to add the tables and some data in our database
@@ -122,7 +131,7 @@ To do this type:
 
 If everything goes as expected you will see something like
 
-![img_1.png](img_1.png)
+![img_1.png](storage/app/public/img_1.png)
 
 Great! The database is filled with tables and data.
 
@@ -131,8 +140,8 @@ Great! The database is filled with tables and data.
 
 ## Testing Api With Postman
 
-Inside the roadCubeApi.zip there is a collection for Postman. Import this
-and you will be able to have all endpoints in order to test the api.
+Inside the roadCubeApi.zip there is a collection and environment for Postman. Import those files in Postman
+and you will be able to have all endpoints and global variables in order to test the api.
 [Instructions on how to setup and import collection in postman](https://developer.ft.com/portal/docs-start-install-postman-and-import-request-collection)
 
 
@@ -223,4 +232,24 @@ Admin routes are accessible only for logged users that have the admin role and a
     Delete all logs in database
 ```
 
-### 
+## Run Tests
+To run the tests just type
+```
+> php artisan test
+```
+All test should pass.
+
+## Issues and Solutions
+
+There are some issues will may face in the project setup that are mentioned above.
+In summary:
+
+1) Laravel 9 version require 8.0.2 php version and above, so be sure that your machine is running a proper version.
+2) When you will run the api/store/search request you may see an SQL error. That means that you have not enabled 2 extensions on your postgreSQL. Go to the postgres query console and run:
+```
+CREATE EXTENSION cube;
+
+CREATE EXTENSION earthdistance;
+```
+3) Be sure that the composer dependencies are installed successfully. In case that something is going wrong try to delete the **_vendor_** folder and the **_composer.lock_** file. Run again the **_"composer i"_** command.
+4) If the database migration and seed command returns sql error make sure that you made the database connection correctly. Check the database name, host, password, driver etc on the **_.env_** file.
