@@ -2,15 +2,17 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class LogTest extends TestCase
 {
-
+    use DatabaseMigrations;
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->artisan('db:seed');
         $this->signInAsAdmin();
         $this->signInAsUser();
     }
