@@ -33,14 +33,14 @@ class StoresController extends Controller
 
     public function store(StoreStoreRequest $request): Response
     {
-        $content = $request->json()->all();
-        DB::select( DB::raw("SELECT setval(pg_get_serial_sequence('stores', 'store_id'), max(store_id)) FROM stores;"));
+        DB::select(DB::raw("SELECT setval(pg_get_serial_sequence('stores', 'store_id'), max(store_id)) FROM stores;"));
 
-        $stored = $this->storeRepository->create($content);
+        $stored = $this->storeRepository
+            ->create($request->json()->all());
+        return $stored
+            ? response($stored, ResponseAlias::HTTP_CREATED)
+            : response('Store cannot be saved', ResponseAlias::HTTP_BAD_REQUEST);
 
-        if (!$stored) {
-            return response('Store cannot be saved', ResponseAlias::HTTP_BAD_REQUEST);
-        }
-        return response($stored, ResponseAlias::HTTP_CREATED);
+
     }
 }

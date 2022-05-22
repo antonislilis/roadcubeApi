@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class AdminRedirectIfAuthenticated
 {
@@ -16,16 +18,10 @@ class AdminRedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         $user = \Auth::user();
-
-        if (\Auth::user()) {
-
-            if ($user->role->permissions['account_type']['is_admin']) {
-                return $next($request);
-            } else {
-                return response('AdminRedirectIfAuthenticated', 401);
-            }
+        if ($user && $user->role->permissions['account_type']['is_admin']) {
+            return $next($request);
         }
-
-        return $next($request);
+        return response('AdminRedirectIfAuthenticated', ResponseAlias::HTTP_UNAUTHORIZED);
     }
 }
+

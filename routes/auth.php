@@ -13,13 +13,23 @@ Route::group(
         'namespace' => "App\Http\Controllers\Auth\\",
     ],
     function () {
+        
         Route::post('signin', 'SignInController');
-        Route::post('signout', 'SignOutController');
+
         Route::post('register', [
             'uses' => 'RegisterController@register',
             'as' => 'register'
         ]);
 
-        Route::get('user', 'UserController');
+        Route::group(
+            [
+                'middleware' => 'auth',
+            ],
+            function () {
+
+                Route::post('signout', 'SignOutController');
+
+                Route::get('user', 'UserController');
+            });
     }
 );

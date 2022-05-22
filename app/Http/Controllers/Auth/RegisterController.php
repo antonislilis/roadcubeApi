@@ -15,8 +15,11 @@ class RegisterController extends Controller
     { }
 
     public function register(RegisterUserRequest $request) {
+
         $content = $request->json()->all();
+
         DB::select( DB::raw("SELECT setval(pg_get_serial_sequence('users', 'id'), max(id)) FROM users;"));
+        
         $user = $this->userRepository->create([
             'name' => $content['name'],
             'email' => $content['email'],
@@ -24,9 +27,8 @@ class RegisterController extends Controller
             'role_id' => 2
         ]);
 
-        if(!$user) {
-            return response('User cannot be saved', Response::HTTP_BAD_REQUEST );
-        }
-        return response($user, Response::HTTP_OK);
+        return $user
+            ? response($user, Response::HTTP_OK)
+            : response('User cannot be saved', Response::HTTP_BAD_REQUEST );
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use App\Models\Role;
 use Closure;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use URL;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,30 +22,30 @@ class CheckRole
     {
         // if no logged in user exists
         if (!$request->user()) {
-            return redirect('login');
+            return response()->json([
+                'message' => 'Bad request'], ResponseAlias::HTTP_FORBIDDEN);
         }
 
         // get roles from routes
         $role = $request->route()->getAction()['roles'];
-
         // get ids of given roles
         $roles = Role::whereIn('role', $role)->select('id')->get();
 
         if ($roles->isEmpty()) {
             //Auth::logout();
-            return \Redirect::away(URL::previous());
+            return response()->json([
+                'message' => 'Bad request'], ResponseAlias::HTTP_BAD_REQUEST);
 
         }
 
         // convert object to array
-        foreach ($roles as $key => $role) {
+        foreach ($roles as $role) {
             $role_ids[] = $role->id;
         }
-
         // check user role id and roles ids from routes
         if (!in_array($request->user()->role_id, $role_ids)) {
-
-            return redirect('restricted')->with('url', '/home');
+            return response()->json([
+                'message' => 'Bad request'], ResponseAlias::HTTP_BAD_REQUEST);
         }
 
         return $next($request);

@@ -10,10 +10,9 @@ class SignInController extends Controller
 {
     public function __invoke(Request $request) {
         $content = $request->json()->all();
-        if(!$token = auth()->attempt($content)) {
-            return response(null, Response::HTTP_UNAUTHORIZED);
-        }
-
-        return response(compact('token'),200,['Token' => $token]);
+        $token = auth()->attempt($content);
+        return $token
+            ? response(compact('token'),200,['Token' => $token])
+            : response(null, Response::HTTP_UNAUTHORIZED);
     }
 }
