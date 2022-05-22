@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\LogRepository;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 

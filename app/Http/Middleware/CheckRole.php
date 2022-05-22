@@ -4,10 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Role;
 use Closure;
-use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use URL;
-use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {

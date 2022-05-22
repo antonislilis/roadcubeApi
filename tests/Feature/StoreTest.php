@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Http\Requests\StoreStoreRequest;
 use App\Http\Requests\StoreStoreSearchRequest;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
